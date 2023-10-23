@@ -22,35 +22,38 @@
 
 VER="2023.10.12@whoamifuck-version 5.2.1"
 
+#==========开始分隔=============
+#因写入文件后会乱码，故关闭此处自定义样式
+
 # [ ++ 颜色变量预定义 ++ ]
 
 # 定义颜色和样式变量
-reset="\033[0m"
-bold="\033[1m"
-underline="\033[4m"
-inverse="\033[7m"
+#reset="\033[0m"
+#bold="\033[1m"
+#underline="\033[4m"
+#inverse="\033[7m"
 
 # 定义前景色变量
-redx="\e[1;31m"
-black="\033[30m"
-red="\033[1;31m"
-green="\033[32m"
-yellow="\033[33m"
-blue="\033[1;34m"
-purple="\033[35m"
-cyan="\033[36m"
-white="\033[1;37m"
+#redx="\e[1;31m"
+#black="\033[30m"
+#red="\033[1;31m"
+#green="\033[32m"
+#yellow="\033[33m"
+#blue="\033[1;34m"
+#purple="\033[35m"
+#cyan="\033[36m"
+#white="\033[1;37m"
 
 # 定义背景色变量
-bg_black="\033[40m"
-bg_red="\033[41m"
-bg_green="\033[42m"
-bg_yellow="\033[43m"
-bg_blue="\033[44m"
-bg_purple="\033[45m"
-bg_cyan="\033[46m"
-bg_white="\033[47m"
-
+#bg_black="\033[40m"
+#bg_red="\033[41m"
+#bg_green="\033[42m"
+#bg_yellow="\033[43m"
+#bg_blue="\033[44m"
+#bg_purple="\033[45m"
+#bg_cyan="\033[46m"
+#bg_white="\033[47m"
+#==========结束分隔=============
 
 # [ ROOT Check ]
 if [ "$EUID" -ne 0 ]; then
