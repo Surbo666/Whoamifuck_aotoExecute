@@ -1,1 +1,60 @@
+#!/bin/bash
 
+#此文件执行需借助crond，可以将其放入cron.hourly或cron.daily中让其每小时、每天自动执行，也可以利用crontab写入定时任务当中
+#此文件的最大空间为1G，当文件达到1G时，自动清理前500M文件
+
+#检测脚本路径
+whoamifuck="/etc/whoamifuck/whoamifuck.sh"
+#日志文件路径
+log_file="/var/log/whoamifuck/whoamifuck.log"
+#缓存路径
+temp_log="/var/log/whoamifuck/temp.log"
+#最大占用空间
+max_size=$((1024*1024*1000))
+#清理空间  
+clean_size=$((1024*1024*500))
+#当前时间 
+now_time=$(date "+%Y-%m-%d %H:%M:%S")
+
+check_log_size() {
+    if [ -f "$log_file" ]; then
+        size=$(stat -c%s "$log_file")
+	echo "========================================" >> $log_file
+        echo "当前日志文件大小：$size 字节" >> $log_file
+
+        if [ $size -ge $max_size ]; then
+            clean_log_file
+        fi
+    fi
+}
+
+clean_log_file() {
+    echo "========================================" >> $log_file
+    echo "日志文件达到最大大小，开始清理..." >> $log_file
+
+    tail -c $clean_size "$log_file" > $temp_log
+    mv $temp_log "$log_file"
+    echo "========================================" >> $log_file
+    echo "日志文件清理完成" >> $log_file
+}
+
+write_to_log() {
+    printf "\n" >> $log_file
+    echo "=======================================================================================================" >> $log_file
+    echo "                                   开始检测，当前时间$now_time" >> $log_file
+    echo "=======================================================================================================" >> $log_file
+    $whoamifuck -a >> $log_file
+    check_log_size
+    echo "=======================================================================================================" >> $log_file
+    echo "                                   检测完成，等待下一次检测" >> $log_file
+    echo "=======================================================================================================" >> $log_file
+    printf "\n" >> $log_file
+}
+
+# 主程序入口
+main() {
+    write_to_log
+}
+
+# 执行主程序
+main
