@@ -1,3 +1,19 @@
+#fork变化
+#添加自动执行脚本，需依赖crond执行
+#自动执行后的日志文件设定大小上限，避免磁盘写满
+
+#用法
+#将autoExeWhoamifuck文件放入"/etc/cron.hourly"，执行"chmod 755 autoExeWhoamifuck"命令，最后执行"mkdir /var/log/whoamifuck"命令
+#this autoExeWhoamifuck file need into "/etc/cron.hourly" and execute "chmod 755 autoExeWhoamifuck", last execute "mkdir /var/log/whoamifuck"
+
+#auto execute script TODO
+#本程序还需依赖crond执行，后续可将其优化为独立进程
+
+#main program TODO
+#主程序“whoamifuck”可编写超过阈值自动告警程序，帮助运维人员更方便发现问题
+#当前基于系统日志判断，可根据规则进行基线核查
+#RHEL 8不再支持pam_tally2，故pam_tally2.so文件缺失，可更换为pam_faillock.so
+
 # 司稽
 
 中文 | [English](https://github.com/enomothem/Whoamifuck/blob/main/README-EN.md) 
